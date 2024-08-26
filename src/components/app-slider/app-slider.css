@@ -1,0 +1,11 @@
+.slider-tabs-block-visible {
+    display: flex;
+    align-items: center;
+    margin: 0 -4px;
+    position: absolute;
+}
+
+.slider-tabs {
+    height: 38px;
+    overflow: hidden;
+}

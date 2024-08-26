@@ -1,0 +1,10 @@
+.projects-list {
+    padding: 0;
+    margin-top: 14.5px;
+}
+.tags {
+    display: flex;
+    align-items: center;
+    margin: 0 -4px;
+    margin-top: 10px;
+}

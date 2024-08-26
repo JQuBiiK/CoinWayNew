@@ -1,0 +1,14 @@
+.tags-item {
+    border-radius: 8px;
+    background: var(--white);
+    padding: 5px 10px;
+    text-align: center;
+    cursor: default;
+    color: var(--black-bg-card);
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: capitalize;
+    margin: 0 4px;
+}

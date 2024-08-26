@@ -1,13 +1,29 @@
-body {
+* {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Roboto', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "RoadRadioBold";
+  src: url("fonts/roadradio_bold.otf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+:root {
+  --bg-color: #0F0F0F;
+  --icon: #BEBEBE;
+  --white: #EDEDED;
+  --black-bg-card: #202020;
+  --black-stroke-card: #373737;
+  --grey-bg-filter: #2F3030;
+  --gold: #FCB602;
+}
+
+.container {
+  padding: 0;
 }

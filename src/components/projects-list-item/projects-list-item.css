@@ -1,0 +1,39 @@
+.projects-list-item {
+    border-radius: 15px;
+    border: 1px solid var(--black-stroke-card);
+    background: var(--black-bg-card);
+    height: auto;
+    padding: 10px;
+    margin: 5.5px 0;
+    width: 100%;
+    display: block;
+    text-decoration: none;
+}
+
+.projects-list-item-header {
+    display: flex;
+    align-items: center;
+}
+
+.projects-list-item-img {
+    width: 50%;
+    height: 50%;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.projects-list-item-img img {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+}
+
+.projects-list-item-title {
+    color: var(--white);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    width: 50%;
+}

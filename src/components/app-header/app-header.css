@@ -1,0 +1,21 @@
+.header {
+    padding: 18px 0 30px 0;
+}
+
+.header-title-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.header-title-block li {
+    max-height: 24px;
+}
+
+.project-title-text h1{
+    color: var(--white);
+    text-transform: uppercase;
+    font-family: 'RoadRadioBold', sans-serif;
+    line-height: 26px;
+}

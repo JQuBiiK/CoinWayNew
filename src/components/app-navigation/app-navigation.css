@@ -1,0 +1,34 @@
+.navigation {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 18px 27px;
+    background-color: var(--grey-bg-filter);
+    width: 100%;
+    max-width: 560px;
+}
+
+.navigation-block-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+}
+
+
+.navigation-block-list-item-link {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border: 1px solid var(--white);
+}
+
+.navigation-block-list-item-link.visout {
+    border: none
+}
