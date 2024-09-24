@@ -12,3 +12,8 @@
     text-transform: capitalize;
     margin: 0 4px;
 }
+
+.tags-item.Free {
+    background-color: var(--grey-bg-filter);
+    color: var(--white);
+}

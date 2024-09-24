@@ -27,6 +27,7 @@
     width: 60px;
     height: 60px;
     border-radius: 15px;
+    display: block;
 }
 
 .projects-list-item-title {

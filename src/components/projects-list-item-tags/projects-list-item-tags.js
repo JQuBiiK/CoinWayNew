@@ -1,11 +1,10 @@
+import './projects-list-item-tags.css';
 
-
-import './projects-list-item-tags.css'
-
-function ProjectsListItemTags() {
-    return(
-        <div className="tags-item">
-            Free
+function ProjectsListItemTags({ tagName }) {  // Принимаем название тега через пропс tagName
+    const tagClassName = `tags-item ${tagName}`;
+    return (
+        <div className={tagClassName}>
+            {tagName}  {/* Отображаем название тега */}
         </div>
     );
 }

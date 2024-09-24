@@ -5,7 +5,7 @@ function AppHeader() {
         <header className="header">
             <ul className="header-title-block">
                 <li className="project-title-info">
-                    <a href="#" className="project-title-notifications-link">
+                    <a href={'main'} className="project-title-notifications-link">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path id="info"
@@ -18,7 +18,7 @@ function AppHeader() {
                     <h1>проекты</h1>
                 </li>
                 <li className="project-title-notifications">
-                    <a href="#" className="project-title-notifications-link">
+                    <a href={'youtube.com'} className="project-title-notifications-link">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
