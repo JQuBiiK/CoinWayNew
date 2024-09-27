@@ -33,34 +33,54 @@ pool.connect((err) => {
 // Эндпоинт для получения всех проектов
 app.get('/projects', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM projects_project');
-        res.json(result.rows); // Возвращаем все строки из таблицы проектов
+        const result = await pool.query(`
+            SELECT p.*, array_agg(DISTINCT n.network_id) AS networks, array_agg(DISTINCT t.name) AS tags
+            FROM projects_project p
+            LEFT JOIN projects_project_networks n ON p.id = n.project_id
+            LEFT JOIN projects_project_tags pt ON p.id = pt.project_id
+            LEFT JOIN projects_tag t ON pt.tag_id = t.id
+            GROUP BY p.id
+        `);
+        res.json(result.rows); // Возвращаем проекты с их сетями и тегами
     } catch (err) {
         console.error('Error fetching projects:', err);
         res.status(500).send('Error fetching projects');
     }
 });
 
-// Эндпоинт для получения тегов для каждого проекта
-app.get('/project-tags', async (req, res) => {
+// Эндпоинт для получения всех сетей
+app.get('/networks', async (req, res) => {
     try {
-        const result = await pool.query(`
-            SELECT 
-                pt.project_id, 
-                array_agg(t.name) as tags
-            FROM projects_project_tags pt
-            JOIN projects_tag t ON t.id = pt.tag_id  -- Связь через projects_project_tags
-            GROUP BY pt.project_id
-        `);
-        res.json(result.rows); // Возвращаем проект и его теги
+        const result = await pool.query('SELECT * FROM projects_network');
+        res.json(result.rows); // Возвращаем сети
     } catch (err) {
-        console.error('Error fetching project tags:', err);
-        res.status(500).send('Error fetching project tags');
+        console.error('Error fetching networks:', err);
+        res.status(500).send('Error fetching networks');
     }
 });
 
+// Эндпоинт для фильтрации проектов по сетям
+app.post('/filter-networks', async (req, res) => {
+    const { networks } = req.body;
+    if (!networks || networks.length === 0) {
+        return res.json([]); // Если сети не выбраны, возвращаем пустой массив
+    }
 
-// Эндпоинт для получения всех тегов для слайдера
+    try {
+        const query = `
+            SELECT p.*
+            FROM projects_project p
+            JOIN projects_project_networks pn ON pn.project_id = p.id
+            WHERE pn.network_id = ANY($1::uuid[])
+        `;
+        const result = await pool.query(query, [networks]); // Передаем список сетей для фильтрации
+        res.json(result.rows); // Возвращаем отфильтрованные проекты
+    } catch (err) {
+        console.error('Error filtering projects:', err);
+        res.status(500).send('Error filtering projects');
+    }
+});
+
 app.get('/tags', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM projects_tag');  // Получаем все теги для слайдера
@@ -71,36 +91,20 @@ app.get('/tags', async (req, res) => {
     }
 });
 
-app.get('/networks', async (req, res) => {
+app.get('/project-tags', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM projects_network');  // Получаем все сети для модалки
-        res.json(result.rows);  // Возвращаем сети
+        const result = await pool.query(`
+            SELECT 
+                pt.project_id, 
+                array_agg(t.name) as tags
+            FROM projects_project_tags pt
+            JOIN projects_tag t ON t.id = pt.tag_id
+            GROUP BY pt.project_id
+        `);
+        res.json(result.rows); // Возвращаем проект и его теги
     } catch (err) {
-        console.error('Error fetching networks:', err);
-        res.status(500).send('Error fetching networks');
-    }
-});
-
-// Эндпоинт для получения связей проектов с сетями
-app.post('/filter-networks', async (req, res) => {
-    const { networks } = req.body;  // Получаем список сетей от клиента
-
-    if (!networks || networks.length === 0) {
-        return res.json([]);  // Если сети не выбраны, возвращаем пустой массив
-    }
-
-    try {
-        const query = `
-            SELECT p.*
-            FROM projects_project p
-            JOIN projects_project_networks pn ON pn.project_id = p.id
-            WHERE pn.network_id = ANY($1::uuid[])
-        `;
-        const result = await pool.query(query, [networks]);  // Передаем список сетей для фильтрации
-        res.json(result.rows);  // Возвращаем отфильтрованные проекты
-    } catch (err) {
-        console.error('Error filtering projects:', err);
-        res.status(500).send('Error filtering projects');
+        console.error('Error fetching project tags:', err);
+        res.status(500).send('Error fetching project tags');
     }
 });
 

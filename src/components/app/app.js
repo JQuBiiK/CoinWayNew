@@ -28,7 +28,7 @@ function App() {
             });
     }, []);
 
-    // Получение тегов
+    // Получение тегов для проектов
     useEffect(() => {
         axios.get('http://localhost:5000/project-tags')
             .then(response => {
@@ -75,7 +75,7 @@ function App() {
         setIsModalOpen(false);
     };
 
-    // Фильтрация проектов по сети
+    // Фильтрация проектов по сетям
     const handleFilterProjects = (selectedNetworks) => {
         if (selectedNetworks.length === 0) {
             setFilteredProjects(projects);

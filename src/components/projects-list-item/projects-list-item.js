@@ -1,7 +1,7 @@
 import ProjectsListItemTags from "../projects-list-item-tags/projects-list-item-tags";
 import './projects-list-item.css';
 
-function ProjectsListItem({ title, projectTags = [] }) {  // Устанавливаем значение по умолчанию для projectTags как пустой массив
+function ProjectsListItem({ title, projectTags = [] }) {  // Принимаем теги как пропс
     return (
         <div className="col-6 projects-list-wrapper">
             <a href={'./index.html'} className="projects-list-item">
@@ -14,7 +14,7 @@ function ProjectsListItem({ title, projectTags = [] }) {  // Устанавли�
                     </div>
                 </div>
                 <div className="tags">
-                    {projectTags.map((tag, index) => (  // Проверяем, что теги существуют и перебираем их
+                    {projectTags.map((tag, index) => (  // Отображаем теги проекта
                         <ProjectsListItemTags key={index} tagName={tag} />
                     ))}
                 </div>
